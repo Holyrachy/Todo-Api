@@ -41,7 +41,7 @@ func CreateTodo(c *fiber.Ctx) error {
 	todo.ID = idCounter
 	idCounter++
 	todos = append(todos, todo)
-	return c.Status(201).JSON(todo)
+	return c.Status(201).JSON(todo) 
 }
 
 // Update a todo
