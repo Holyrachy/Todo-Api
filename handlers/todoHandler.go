@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"strconv"
 	"todo-app/models"
 
@@ -41,7 +42,7 @@ func CreateTodo(c *fiber.Ctx) error {
 	todo.ID = idCounter
 	idCounter++
 	todos = append(todos, todo)
-	return c.Status(201).JSON(todo) 
+	return c.Status(201).JSON(todo)
 }
 
 // Update a todo
@@ -74,7 +75,7 @@ func DeleteTodoByID(c *fiber.Ctx) error {
 	for i, todo := range todos {
 		if idConv == todo.ID {
 			todos = append(todos[:i], todos[i+1:]...)
-			return c.SendStatus(204)
+			return c.Status(200).JSON(fiber.Map{"message": fmt.Sprintf("Todo with ID %v is deleted", id)})
 		}
 	}
 	return c.Status(404).JSON(fiber.Map{"error": "Todo not found"})
